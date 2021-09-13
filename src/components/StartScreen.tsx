@@ -2,6 +2,7 @@ import React from "react"
 import styled, {css} from "styled-components";
 import circleIcon from "../assets/circle.svg"
 import crossIcon from "../assets/cross.svg"
+import { Link } from "react-router-dom";
 
 const FlexStyle = css `
     display: flex;
@@ -23,12 +24,8 @@ const StartContainer = styled.section `
     max-width: 600px;
 `;
 const Heading = styled.h1 ``;
-const Form = styled.form `
-    // ${FlexStyle}
-`;
-const InputWrapper = styled.div `
-    // ${FlexStyle}
-`;
+const Form = styled.form ``;
+const InputWrapper = styled.div ``;
 const FirstInput = styled.input `
     ${InputStyle}
 `;
@@ -64,7 +61,6 @@ const LimitTimeWrapper = styled.div `
 const LabelTime = styled.label `
     font-size: 24px;
 `;
-
 const ButtonStart = styled.button `
     font-size: 48px;
     font-weight: normal;
@@ -93,18 +89,28 @@ const StartScreen: React.FC<StartScreenProps> = () => {
                 <InputWrapper>
                     <Label>
                         <Image src={circleIcon} alt="Circle image"/>
-                        <FirstInput type="text" placeholder="leave empty to use AI or enter player name" onClick={() => null}/>
+                        <FirstInput 
+                            type="text" 
+                            placeholder="leave empty to use AI or enter player name" 
+                        />
                     </Label>
                     <Label>
                         <Image src={crossIcon} alt="Cross image"/>
-                        <SecondInput type="text" placeholder="leave empty to use AI or enter player name" onClick={() => null}/>
+                        <SecondInput 
+                            type="text" 
+                            placeholder="leave empty to use AI or enter player name" 
+                        />
                     </Label>
                     <LimitTimeWrapper>
                         <LabelTime>turn Time limit in seconds: </LabelTime>
-                        <ThirdInput type="text" placeholder="3s" required />
+                        <ThirdInput type="text" placeholder="3s" value="3s" onChange={() => console.log("input")} required />
                     </LimitTimeWrapper>
                 </InputWrapper>
-                <ButtonStart type="button" onClick={() => null}>Start</ButtonStart>
+                <ButtonStart type="button">
+                    <Link to="/gameStart">
+                    Start
+                    </Link>
+                </ButtonStart>
             </Form>
         </StartContainer>
     )
