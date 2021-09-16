@@ -7,8 +7,10 @@ import { useDispatch } from "react-redux";
 import { setFirstInput } from "../features/gameStart/firstInputSlice";
 import { setSecondInput } from "../features/gameStart/secondInputSlice";
 import { setTiming } from "../features/gameStart/timingSlice"
+import { fonts } from "../fonts/fonts";
 
 const InputStyle = css `
+    font-family: inherit;
     font-size: 24px;
     border: none;
     padding-inline-start: 39px;
@@ -16,13 +18,17 @@ const InputStyle = css `
 `;
 
 export const StartContainer = styled.section `
+    ${fonts}
+    font-family: 'Usuazi Hosomozi', sans-serif;
     font-weight: normal;
     font-size: 24px;
     text-align: center;
     margin: auto;
     max-width: 600px;
 `;
-export const Heading = styled.h1 ``;
+export const Heading = styled.h1 `
+    font-weight: 400;
+`;
 const Form = styled.form ``;
 const InputWrapper = styled.div ``;
 const FirstInput = styled.input `
@@ -32,6 +38,7 @@ const SecondInput = styled.input `
     ${InputStyle}
 `;
 const ThirdInput = styled.input `
+    font-family: inherit;
     font-size: 24px;
     border: none;
     padding-inline-start: 16px;
@@ -61,13 +68,12 @@ const LabelTime = styled.label `
     font-size: 24px;
 `;
 export const ButtonStart = styled.button `
-    font-size: 48px;
+    font-family: inherit;
+    font-size: 36px;
     font-weight: normal;
     border: none;
     background-color: transparent;
-    padding-block-start: 40px;
     cursor: pointer;
-    
     a {
         text-decoration: none;
         color: inherit;
@@ -91,7 +97,6 @@ const StartScreen: React.FC<StartScreenProps> = () => {
         dispatch(setFirstInput(e.target.value))
     }
     
-
     const handleSecondInputChange = (e: any) => {
         dispatch(setSecondInput(e.target.value))
     }
@@ -131,8 +136,8 @@ const StartScreen: React.FC<StartScreenProps> = () => {
                         />
                     </LimitTimeWrapper>
                 </InputWrapper>
-                <ButtonStart type="button">
-                    <Link to="/gameStart">
+                <ButtonStart>
+                    <Link to="/startPlayers">
                         Start
                     </Link>
                 </ButtonStart>

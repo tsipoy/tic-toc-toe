@@ -2,7 +2,8 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import useReducer from '../features/gameStart/firstInputSlice';
 import counterReducer from '../features/counter/counterSlice';
 import secondReducer from '../features/gameStart/secondInputSlice';
-import timingReducer from '../features/gameStart/timingSlice'
+import timingReducer from '../features/gameStart/timingSlice';
+import boardReducer from "../features/boardGame/BoardSlice"
 
 
 export const store = configureStore({
@@ -11,6 +12,7 @@ export const store = configureStore({
     firstInput: useReducer,
     secondInput: secondReducer,
     timing: timingReducer,
+    board: boardReducer,
   },
 });
 
