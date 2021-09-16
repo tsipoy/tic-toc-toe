@@ -1,4 +1,6 @@
 export enum Paths {
     START_SCREEN = "/",
-    GAME_SCREEN = "/gameStart"
+    START_PLAYERS = "/startPlayers",
+    GAME_START = "/gameStart",
+    RESTART = "/restart"
 }

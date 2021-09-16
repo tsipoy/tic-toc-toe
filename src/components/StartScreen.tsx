@@ -3,27 +3,32 @@ import styled, {css} from "styled-components";
 import circleIcon from "../assets/circle.svg"
 import crossIcon from "../assets/cross.svg"
 import { Link } from "react-router-dom";
-
-const FlexStyle = css `
-    display: flex;
-    flex-direction: column;
-`;
+import { useDispatch } from "react-redux";
+import { setFirstInput } from "../features/gameStart/firstInputSlice";
+import { setSecondInput } from "../features/gameStart/secondInputSlice";
+import { setTiming } from "../features/gameStart/timingSlice"
+import { fonts } from "../fonts/fonts";
 
 const InputStyle = css `
+    font-family: inherit;
     font-size: 24px;
     border: none;
     padding-inline-start: 39px;
     width: -webkit-fill-available;
 `;
 
-const StartContainer = styled.section `
+export const StartContainer = styled.section `
+    ${fonts}
+    font-family: 'Usuazi Hosomozi', sans-serif;
     font-weight: normal;
     font-size: 24px;
     text-align: center;
     margin: auto;
     max-width: 600px;
 `;
-const Heading = styled.h1 ``;
+export const Heading = styled.h1 `
+    font-weight: 400;
+`;
 const Form = styled.form ``;
 const InputWrapper = styled.div ``;
 const FirstInput = styled.input `
@@ -33,6 +38,7 @@ const SecondInput = styled.input `
     ${InputStyle}
 `;
 const ThirdInput = styled.input `
+    font-family: inherit;
     font-size: 24px;
     border: none;
     padding-inline-start: 16px;
@@ -61,17 +67,19 @@ const LimitTimeWrapper = styled.div `
 const LabelTime = styled.label `
     font-size: 24px;
 `;
-const ButtonStart = styled.button `
-    font-size: 48px;
+export const ButtonStart = styled.button `
+    font-family: inherit;
+    font-size: 36px;
     font-weight: normal;
     border: none;
     background-color: transparent;
-    padding-block-start: 40px;
     cursor: pointer;
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 `;
-const Image = styled.img ` `;
-
-
+export const Image = styled.img ` `;
 
 
 interface StartScreenProps {
@@ -82,6 +90,21 @@ interface StartScreenProps {
 }
 
 const StartScreen: React.FC<StartScreenProps> = () => {
+
+    const dispatch = useDispatch();
+
+    const handleFirstInputChange = (e: any) => {
+        dispatch(setFirstInput(e.target.value))
+    }
+    
+    const handleSecondInputChange = (e: any) => {
+        dispatch(setSecondInput(e.target.value))
+    }
+
+    const handleTimingChange = (e: any) => {
+        dispatch(setTiming(e.target.value))
+    }
+
     return (
         <StartContainer>
             <Heading>Tic tac toe</Heading>
@@ -92,6 +115,7 @@ const StartScreen: React.FC<StartScreenProps> = () => {
                         <FirstInput 
                             type="text" 
                             placeholder="leave empty to use AI or enter player name" 
+                            onChange={handleFirstInputChange}
                         />
                     </Label>
                     <Label>
@@ -99,16 +123,22 @@ const StartScreen: React.FC<StartScreenProps> = () => {
                         <SecondInput 
                             type="text" 
                             placeholder="leave empty to use AI or enter player name" 
+                            onChange={handleSecondInputChange}
                         />
                     </Label>
                     <LimitTimeWrapper>
                         <LabelTime>turn Time limit in seconds: </LabelTime>
-                        <ThirdInput type="text" placeholder="3s" value="3s" onChange={() => console.log("input")} required />
+                        <ThirdInput 
+                            type="text" 
+                            placeholder="3s" 
+                            onChange={handleTimingChange} 
+                            required 
+                        />
                     </LimitTimeWrapper>
                 </InputWrapper>
-                <ButtonStart type="button">
-                    <Link to="/gameStart">
-                    Start
+                <ButtonStart>
+                    <Link to="/startPlayers">
+                        Start
                     </Link>
                 </ButtonStart>
             </Form>
